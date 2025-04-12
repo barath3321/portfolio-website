@@ -1,0 +1,13 @@
+# Save this file as 'netlify.toml' in your project root
+[build]
+  functions = "netlify/functions"
+  publish = "." # The directory with your static files
+  
+[dev]
+  functions = "netlify/functions"
+  publish = "."
+  
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
