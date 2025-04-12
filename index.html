@@ -798,6 +798,52 @@
             color: #777;
         }
         
+        /* Notification styles */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease forwards;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .notification.success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .notification.error {
+            background-color: #F44336;
+            color: white;
+        }
+        
+        .notification .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
         /* Responsive Styles */
         @media screen and (max-width: 992px) {
             .skills-categories {
@@ -866,41 +912,6 @@
                 grid-template-columns: 1fr;
             }
         }
-
-        /* Notification Styles */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 5px;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .notification.success {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .notification.error {
-            background-color: #F44336;
-            color: white;
-        }
-
-        .notification .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
@@ -926,8 +937,8 @@
             <p class="intro-text">Software Engineer specializing in <span class="highlight">AI & Machine Learning</span> with a focus on developing scalable solutions for real-world challenges.</p>
             <div class="social-links-header">
                 <a href="mailto:barthjai@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/barathkumarvijaysridhar/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/barath3321" target="_blank"><i class="fab fa-github"></i></a>
             </div>
         </div>
         <a href="#about" class="scroll-down">
@@ -1132,25 +1143,29 @@
             
             <div class="contact-grid">
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <!-- Netlify Form -->
+                    <form name="contact" method="POST" data-netlify="true">
+                        <!-- Hidden input necessary for Netlify forms -->
+                        <input type="hidden" name="form-name" value="contact">
+                        
                         <div class="form-group">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="subject" class="form-label">Subject</label>
-                            <input type="text" id="subject" class="form-control" required>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
                         </div>
                         
                         <div class="form-group">
                             <label for="message" class="form-label">Message</label>
-                            <textarea id="message" class="form-control" required></textarea>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
                         </div>
                         
                         <button type="submit" class="form-button">
@@ -1177,57 +1192,79 @@
                     
                     <div class="contact-info-item">
                         <i class="fab fa-linkedin"></i>
-                        <span><a href="https://linkedin.com" target="_blank">LinkedIn</a></span>
+                        <span><a href="https://www.linkedin.com/in/barathkumarvijaysridhar/" target="_blank">LinkedIn</a></span>
                     </div>
                     
                     <div class="contact-info-item">
                         <i class="fab fa-github"></i>
-                        <span><a href="https://github.com" target="_blank">GitHub</a></span>
+                        <span><a href="https://github.com/barath3321" target="_blank">GitHub</a></span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Footer -->
     <footer>
         <div class="container footer-content">
             <div class="social-links">
                 <a href="mailto:barthjai@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/barathkumarvijaysridhar/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/barath3321" target="_blank"><i class="fab fa-github"></i></a>
             </div>
             <p class="copyright">&copy; 2025 Barath Kumar</p>
         </div>
     </footer>
-
-    <!-- Contact Form Script -->
+    
+    <!-- Form submission notification script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update active navigation link based on scroll position
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
+        // Show notification function
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <p>${message}</p>
+                <button class="close-btn">&times;</button>
+            `;
             
-            window.addEventListener('scroll', function() {
-                let current = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop - 300) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').slice(1) === current) {
-                        link.classList.add('active');
-                    }
-                });
+            // Add to DOM
+            document.body.appendChild(notification);
+            
+            // Close button functionality
+            const closeBtn = notification.querySelector('.close-btn');
+            closeBtn.addEventListener('click', function() {
+                document.body.removeChild(notification);
             });
             
-            // Smooth scroll for navigation links and scroll down button
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 5000);
+        }
+    
+        // Form submission handling
+        const form = document.querySelector('form[name="contact"]');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Don't prevent default - let Netlify handle the form submission
+                
+                // We'll show a notification when the page reloads
+                // Store submission in sessionStorage
+                sessionStorage.setItem('formSubmitted', 'true');
+            });
+        }
+    
+        // Check for form submission when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('formSubmitted') === 'true') {
+                showNotification('Message sent successfully!', 'success');
+                sessionStorage.removeItem('formSubmitted');
+            }
+            
+            // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1235,89 +1272,46 @@
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     
-                    window.scrollTo({
-                        top: targetElement.offsetTop,
-                        behavior: 'smooth'
-                    });
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-links a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
                 });
             });
             
-            // Contact form submission
-            const contactForm = document.querySelector('#contactForm');
-            const submitButton = contactForm.querySelector('.form-button');
-            
-            contactForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
+            // Highlight active section on scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('.nav-links a');
                 
-                // Change button text and disable it during submission
-                const originalButtonText = submitButton.textContent;
-                submitButton.textContent = 'Sending...';
-                submitButton.disabled = true;
+                let currentSection = '';
                 
-                // Get form data
-                const formData = {
-                    name: document.getElementById('name').value,
-                    email: document.getElementById('email').value,
-                    subject: document.getElementById('subject').value,
-                    message: document.getElementById('message').value
-                };
-                
-                try {
-                    // Send to Netlify function
-                    const response = await fetch('/.netlify/functions/contact', {
-                        method: 'POST',
-                        body: JSON.stringify(formData),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
                     
-                    const data = await response.json();
-                    
-                    if (response.ok) {
-                        // Show success message
-                        showNotification('Message sent successfully!', 'success');
-                        contactForm.reset();
-                    } else {
-                        // Show error message
-                        showNotification(data.error || 'Failed to send message', 'error');
+                    if (window.pageYOffset >= sectionTop - 200 && 
+                        window.pageYOffset < sectionTop + sectionHeight - 200) {
+                        currentSection = section.getAttribute('id');
                     }
-                } catch (error) {
-                    console.error('Error:', error);
-                    showNotification('There was an error sending your message', 'error');
-                } finally {
-                    // Restore button state
-                    submitButton.textContent = originalButtonText;
-                    submitButton.disabled = false;
-                }
-            });
-            
-            // Notification function
-            function showNotification(message, type) {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.innerHTML = `
-                    <p>${message}</p>
-                    <button class="close-btn">&times;</button>
-                `;
-                
-                // Add to DOM
-                document.body.appendChild(notification);
-                
-                // Close button functionality
-                notification.querySelector('.close-btn').addEventListener('click', function() {
-                    document.body.removeChild(notification);
                 });
                 
-                // Auto-remove after 5 seconds
-                setTimeout(() => {
-                    if (document.body.contains(notification)) {
-                        document.body.removeChild(notification);
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active');
                     }
-                }, 5000);
-            }
+                });
+            });
         });
     </script>
 </body>
 </html>
-        
